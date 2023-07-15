@@ -1,0 +1,10 @@
+cargo build
+sudo ./target/debug/tcp_ip_rust
+Hello, world!
+main loop...
+received all, dropped current lock sleep 1 sec...
+receive is spawned
+received: 52
+main loop...
+received: 52
+received: 52
