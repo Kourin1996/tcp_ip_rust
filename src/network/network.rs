@@ -97,7 +97,7 @@ impl<'a> NetworkHandler {
 
     fn run_sender_job(device: Arc<Mutex<Device>>, channel: Receiver<Vec<u8>>) {
         for packet in channel.iter() {
-            let res = device
+            match device
                 .lock()
                 .map_err(|err| SendingError::from_locking(err.to_string()))
                 .and_then(|mut device_guard| {
@@ -113,9 +113,7 @@ impl<'a> NetworkHandler {
                     drop(device_guard);
 
                     res
-                });
-
-            match res {
+                }) {
                 Ok(_) => {
                     println!("sent data, size={} [bytes]", packet.len())
                 }
